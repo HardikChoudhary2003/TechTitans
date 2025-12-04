@@ -278,3 +278,53 @@ body {
   background-color: #d4edda;
   color: #28a745;
 }
+
+/* Profile and Emergency Styles */
+.profile-container,
+.emergency-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-header,
+.emergency-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.profile-content,
+.emergency-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.emergency-content {
+  display: grid;
+  gap: 30px;
+}
+
+.contacts-list {
+  display: grid;
+  gap: 15px;
+}
+
+.contact-card {
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fdfdfd;
+}
+
+.contact-card h4 {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.contact-card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}

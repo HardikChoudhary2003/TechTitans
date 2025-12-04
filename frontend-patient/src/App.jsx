@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import VitalsPage from './pages/VitalsPage';
 import GoalsPage from './pages/GoalsPage';
 import RemindersPage from './pages/RemindersPage';
+import ProfilePage from './pages/ProfilePage';
+import EmergencyContactPage from './pages/EmergencyContactPage';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path="/patient/vitals" element={<VitalsPage />} />
             <Route path="/patient/goals" element={<GoalsPage />} />
             <Route path="/patient/reminders" element={<RemindersPage />} />
+            <Route path="/patient/profile" element={<ProfilePage />} />
+            <Route path="/patient/emergency-contact" element={<EmergencyContactPage />} />
             <Route path="*" element={<Navigate to="/patient/login" replace />} />
           </Routes>
         </div>
