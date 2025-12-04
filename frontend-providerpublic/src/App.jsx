@@ -25,6 +25,7 @@ function App() {
             <Route path="/info/health" element={<HealthInfoPage />} />
             <Route path="/info/facilities" element={<FacilitiesPage />} />
             <Route path="/info/privacy" element={<PrivacyPolicyPage />} />
+            <Route path="/" element={<Navigate to="/provider/login" replace />} />
             <Route path="*" element={<Navigate to="/provider/login" replace />} />
           </Routes>
         </div>

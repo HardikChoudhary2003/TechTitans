@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Sidebar from '../components/Sidebar';
 
 const Dashboard = () => {
@@ -18,18 +19,26 @@ const Dashboard = () => {
         if (!storedUser) {
             navigate('/patient/login');
         } else {
-            setUser(JSON.parse(storedUser));
-
-            // Mock API call
-            // In a real app, this would be an axios.get('/patient/dashboard')
-            setHealthData({
-                steps: 8432,
-                sleep: 7.5,
-                heartRate: 72,
-                water: 1.8,
-            });
+            const user = JSON.parse(storedUser);
+            setUser(user);
+            fetchDashboardData(user.token);
         }
     }, [navigate]);
+
+    const fetchDashboardData = async (token) => {
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const response = await axios.get('http://localhost:5000/patient/dashboard-stats', config);
+            setHealthData(response.data);
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+            // Fallback to 0s if fetch fails, handled by initial state
+        }
+    };
 
     const onLogout = () => {
         localStorage.removeItem('user');

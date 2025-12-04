@@ -135,6 +135,39 @@ const getEmergencyContact = asyncHandler(async (req, res) => {
     res.status(200).json(contacts);
 });
 
+const getDashboardStats = asyncHandler(async (req, res) => {
+    // Get latest vitals
+    const latestVitals = await Vitals.aggregate([
+        { $match: { user: req.user._id } },
+        { $sort: { date: -1 } },
+        {
+            $group: {
+                _id: '$type',
+                value: { $first: '$value' },
+                unit: { $first: '$unit' },
+                date: { $first: '$date' }
+            }
+        }
+    ]);
+
+    // Transform vitals array to object
+    const vitalsMap = {};
+    latestVitals.forEach(v => {
+        vitalsMap[v._id] = v.value;
+    });
+
+    // Get active goals
+    const goals = await Goal.find({ user: req.user._id });
+
+    res.json({
+        steps: vitalsMap['steps'] || 0,
+        sleep: vitalsMap['sleep'] || 0,
+        heartRate: vitalsMap['heart_rate'] || 0,
+        water: vitalsMap['water'] || 0,
+        goals: goals
+    });
+});
+
 module.exports = {
     getProfile,
     updateProfile,
@@ -146,4 +179,5 @@ module.exports = {
     getReminders,
     addEmergencyContact,
     getEmergencyContact,
+    getDashboardStats
 };

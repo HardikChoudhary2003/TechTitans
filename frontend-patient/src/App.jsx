@@ -10,6 +10,7 @@ import GoalsPage from './pages/GoalsPage';
 import RemindersPage from './pages/RemindersPage';
 import ProfilePage from './pages/ProfilePage';
 import EmergencyContactPage from './pages/EmergencyContactPage';
+import MessagesPage from './pages/MessagesPage';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
             <Route path="/patient/reminders" element={<RemindersPage />} />
             <Route path="/patient/profile" element={<ProfilePage />} />
             <Route path="/patient/emergency-contact" element={<EmergencyContactPage />} />
+            <Route path="/patient/emergency-contact" element={<EmergencyContactPage />} />
+            <Route path="/patient/messages" element={<MessagesPage />} />
+            <Route path="/" element={<Navigate to="/patient/login" replace />} />
             <Route path="*" element={<Navigate to="/patient/login" replace />} />
           </Routes>
         </div>

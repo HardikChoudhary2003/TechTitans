@@ -23,13 +23,19 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['patient', 'provider', 'admin'],
-        default: 'patient'
+        enum: ['patient', 'provider'],
+        default: 'patient',
     },
-    createdAt: {
+    riskLevel: {
+        type: String,
+        enum: ['Low', 'Moderate', 'High'],
+        default: 'Low',
+    },
+    dob: {
         type: Date,
-        default: Date.now
-    }
+    },
+}, {
+    timestamps: true,
 });
 
 // encrypt the password before saving it to the db

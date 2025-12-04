@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import ProviderSidebar from '../components/ProviderSidebar';
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [stats, setStats] = useState({
         totalPatients: 0,
-        highRisk: 0,
-        consultations: 0,
+        highRiskPatients: 0,
+        consultationsToday: 0,
     });
-    const [consultations, setConsultations] = useState([]);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -19,100 +19,72 @@ const Dashboard = () => {
             navigate('/provider/login');
         } else {
             const parsedUser = JSON.parse(storedUser);
+            if (parsedUser.role !== 'provider') {
+                toast.error('Access denied. Providers only.');
+                navigate('/patient/login');
+                return;
+            }
             setUser(parsedUser);
-            fetchDashboardData(parsedUser);
+            fetchStats(parsedUser.token);
         }
     }, [navigate]);
 
-    const fetchDashboardData = async (currentUser) => {
+    const fetchStats = async (token) => {
         try {
             const config = {
                 headers: {
-                    Authorization: `Bearer ${currentUser.token}`,
+                    Authorization: `Bearer ${token} `,
                 },
             };
-
-            // Fetch patients count
-            const response = await axios.get(
-                'http://localhost:5002/provider/patients',
-                config
-            );
-
-            const patientsCount = response.data.length;
-
-            // Mock High Risk and Consultations for now
-            const highRiskCount = Math.floor(Math.random() * 5); // Mock
-            const consultationsCount = 3; // Mock
+            // In a real app, these would be separate API calls or a single stats endpoint
+            const patientsRes = await axios.get('http://localhost:5002/provider/patients', config);
 
             setStats({
-                totalPatients: patientsCount,
-                highRisk: highRiskCount,
-                consultations: consultationsCount,
+                totalPatients: patientsRes.data.length,
+                highRiskPatients: 5, // Mock for now until backend update
+                consultationsToday: 3, // Mock
             });
-
-            setConsultations([
-                { id: 1, patient: 'John Doe', time: '10:00 AM', type: 'Follow-up' },
-                { id: 2, patient: 'Jane Smith', time: '11:30 AM', type: 'Initial Consultation' },
-                { id: 3, patient: 'Bob Johnson', time: '02:00 PM', type: 'Emergency' },
-            ]);
-
         } catch (error) {
-            toast.error('Failed to fetch dashboard data');
+            console.error(error);
         }
     };
 
-    const onLogout = () => {
-        localStorage.removeItem('user');
-        navigate('/provider/login');
-    };
-
-    if (!user) {
-        return <div>Loading...</div>;
-    }
+    if (!user) return <div>Loading...</div>;
 
     return (
-        <div className="dashboard-container">
-            <header className="dashboard-header">
-                <h1>Provider Dashboard</h1>
-                <div className="user-info">
-                    <span>Welcome, Dr. {user.name}</span>
-                    <button className="btn btn-logout" onClick={onLogout}>
-                        Logout
-                    </button>
-                </div>
-            </header>
+        <div className="app-container">
+            <ProviderSidebar />
+            <div className="main-content">
+                <header className="dashboard-header">
+                    <h1>Welcome, Dr. {user.name}</h1>
+                </header>
 
-            <div className="stats-grid">
-                <div className="stat-card">
-                    <h3>Total Patients</h3>
-                    <p className="stat-value">{stats.totalPatients}</p>
-                </div>
-                <div className="stat-card high-risk">
-                    <h3>High Risk Patients</h3>
-                    <p className="stat-value">{stats.highRisk}</p>
-                </div>
-                <div className="stat-card">
-                    <h3>Today's Consultations</h3>
-                    <p className="stat-value">{stats.consultations}</p>
-                </div>
-            </div>
-
-            <div className="dashboard-content">
-                <section className="consultations-section">
-                    <h2>Upcoming Consultations</h2>
-                    <div className="consultations-list">
-                        {consultations.map((consultation) => (
-                            <div key={consultation.id} className="consultation-card">
-                                <div className="consultation-time">{consultation.time}</div>
-                                <div className="consultation-details">
-                                    <h4>{consultation.patient}</h4>
-                                    <p>{consultation.type}</p>
-                                </div>
-                                <button className="btn btn-sm">View</button>
-                            </div>
-                        ))}
+                <div className="dashboard-content">
+                    <div className="kpi-grid">
+                        <div className="kpi-card">
+                            <h3>Total Patients</h3>
+                            <p className="kpi-value">{stats.totalPatients}</p>
+                            <span className="kpi-unit">active</span>
+                        </div>
+                        <div className="kpi-card" style={{ borderLeft: '5px solid #dc3545' }}>
+                            <h3>High Risk</h3>
+                            <p className="kpi-value" style={{ color: '#dc3545' }}>{stats.highRiskPatients}</p>
+                            <span className="kpi-unit">patients</span>
+                        </div>
+                        <div className="kpi-card">
+                            <h3>Consultations</h3>
+                            <p className="kpi-value">{stats.consultationsToday}</p>
+                            <span className="kpi-unit">today</span>
+                        </div>
                     </div>
-                </section>
+
+                    <div className="chart-container">
+                        <h2>Patient Analytics</h2>
+                        <div className="chart-placeholder">
+                            <p>Patient Growth Graph Placeholder</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

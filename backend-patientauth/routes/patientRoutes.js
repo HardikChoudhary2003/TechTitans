@@ -10,7 +10,8 @@ const {
     addReminder,
     getReminders,
     addEmergencyContact,
-    getEmergencyContact,
+    getEmergencyContacts,
+    getDashboardStats
 } = require('../controllers/patientController');
 const { protect } = require('../middleware/authMiddleware');
 
@@ -19,6 +20,8 @@ router.route('/vitals').post(protect, addVital);
 router.route('/vitals/history').get(protect, getVitalsHistory);
 router.route('/goals').get(protect, getGoals).post(protect, addGoal);
 router.route('/reminders').get(protect, getReminders).post(protect, addReminder);
-router.route('/emergency-contact').get(protect, getEmergencyContact).post(protect, addEmergencyContact);
+router.get('/emergency-contact', protect, getEmergencyContacts);
+router.post('/emergency-contact', protect, addEmergencyContact);
+router.get('/dashboard-stats', protect, getDashboardStats);
 
 module.exports = router;

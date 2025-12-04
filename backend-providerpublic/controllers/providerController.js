@@ -14,10 +14,30 @@ const getPatients = asyncHandler(async (req, res) => {
         throw new Error('Not authorized as provider');
     }
 
-    // In a real app, we would check PatientProviderLink.
-    // For this MVP, we'll list all patients.
+    // Fetch all users with role 'patient'
+    // In a real microservices setup, this might involve an inter-service call 
+    // or accessing a shared DB. Here we access the shared User collection.
     const patients = await User.find({ role: 'patient' }).select('-password');
-    res.status(200).json(patients);
+
+    const patientsWithDetails = patients.map(patient => {
+        let age = 'N/A';
+        if (patient.dob) {
+            const diff = Date.now() - new Date(patient.dob).getTime();
+            const ageDate = new Date(diff);
+            age = Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+
+        return {
+            _id: patient._id,
+            name: patient.name,
+            email: patient.email,
+            risk: patient.riskLevel || 'Low',
+            age: age,
+            lastVisit: new Date().toLocaleDateString() // Still mock for now as we don't track visits yet
+        };
+    });
+
+    res.json(patientsWithDetails);
 });
 
 // @desc    Get patient vitals
