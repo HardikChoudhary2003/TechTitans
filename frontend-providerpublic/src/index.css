@@ -263,3 +263,110 @@ body {
   background-color: #d4edda;
   color: #155724;
 }
+
+/* Patient Details Styles */
+.details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.details-header {
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-back {
+  background: none;
+  color: #007bff;
+  padding: 0;
+  margin-bottom: 10px;
+  width: auto;
+  text-align: left;
+}
+
+.btn-back:hover {
+  background: none;
+  text-decoration: underline;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vitals-section,
+.notes-section {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vitals-list-mini {
+  display: grid;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.vital-card-mini {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.vital-type {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.vital-value {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.vital-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.notes-list {
+  margin-top: 20px;
+  display: grid;
+  gap: 15px;
+}
+
+.note-card {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 4px solid #007bff;
+}
+
+.note-text {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.note-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.note-author {
+  font-weight: 600;
+}
