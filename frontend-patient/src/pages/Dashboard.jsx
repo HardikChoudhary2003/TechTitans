@@ -32,7 +32,7 @@ const Dashboard = () => {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            const response = await axios.get('http://localhost:5000/patient/dashboard-stats', config);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/patient/dashboard-stats`, config);
             setHealthData(response.data);
         } catch (error) {
             console.error('Error fetching dashboard data:', error);

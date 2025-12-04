@@ -20,7 +20,7 @@ const RemindersPage = () => {
                 },
             };
             const response = await axios.get(
-                'http://localhost:5000/patient/reminders',
+                `${import.meta.env.VITE_API_URL}/patient/reminders`,
                 config
             );
             setReminders(response.data);
@@ -46,7 +46,7 @@ const RemindersPage = () => {
             };
 
             await axios.post(
-                'http://localhost:5000/patient/reminders',
+                `${import.meta.env.VITE_API_URL}/patient/reminders`,
                 { title, datetime },
                 config
             );

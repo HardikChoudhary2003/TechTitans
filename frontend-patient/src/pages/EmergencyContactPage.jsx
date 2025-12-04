@@ -25,7 +25,7 @@ const EmergencyContactPage = () => {
                 },
             };
             const response = await axios.get(
-                'http://localhost:5000/patient/emergency-contact',
+                `${import.meta.env.VITE_API_URL}/patient/emergency-contact`,
                 config
             );
             setContacts(response.data);
@@ -58,7 +58,7 @@ const EmergencyContactPage = () => {
             };
 
             await axios.post(
-                'http://localhost:5000/patient/emergency-contact',
+                `${import.meta.env.VITE_API_URL}/patient/emergency-contact`,
                 formData,
                 config
             );

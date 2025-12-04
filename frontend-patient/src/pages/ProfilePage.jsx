@@ -20,7 +20,7 @@ const ProfilePage = () => {
                 },
             };
             const response = await axios.get(
-                'http://localhost:5000/patient/profile',
+                `${import.meta.env.VITE_API_URL}/patient/profile`,
                 config
             );
             setUser(response.data);
@@ -43,7 +43,7 @@ const ProfilePage = () => {
             };
 
             const response = await axios.put(
-                'http://localhost:5000/patient/profile',
+                `${import.meta.env.VITE_API_URL}/patient/profile`,
                 { name },
                 config
             );

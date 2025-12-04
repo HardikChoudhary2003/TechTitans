@@ -37,7 +37,7 @@ const VitalsPage = () => {
                 },
             };
             const response = await axios.get(
-                'http://localhost:5000/patient/vitals/history',
+                `${import.meta.env.VITE_API_URL}/patient/vitals/history`,
                 config
             );
             setVitals(response.data);
@@ -70,7 +70,7 @@ const VitalsPage = () => {
             };
 
             await axios.post(
-                'http://localhost:5000/patient/vitals',
+                `${import.meta.env.VITE_API_URL}/patient/vitals`,
                 formData,
                 config
             );

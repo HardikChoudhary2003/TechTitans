@@ -11,7 +11,7 @@ const HealthInfoPage = () => {
 
     const fetchAdvisories = async () => {
         try {
-            const response = await axios.get('http://localhost:5002/public/info');
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/public/info`);
             setAdvisories(response.data);
         } catch (error) {
             toast.error('Failed to fetch health info');

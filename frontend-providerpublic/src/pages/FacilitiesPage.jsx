@@ -11,7 +11,7 @@ const FacilitiesPage = () => {
 
     const fetchFacilities = async () => {
         try {
-            const response = await axios.get('http://localhost:5002/public/facilities');
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/public/facilities`);
             setFacilities(response.data);
         } catch (error) {
             toast.error('Failed to fetch facilities');

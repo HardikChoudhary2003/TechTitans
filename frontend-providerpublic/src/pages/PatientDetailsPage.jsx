@@ -27,20 +27,20 @@ const PatientDetailsPage = () => {
             // Fetch patient details (simulated by finding in list for now, or fetch specific if endpoint existed)
             // Since we don't have GET /users/:id, we'll fetch all and find.
             // Optimization: Add GET /users/:id later.
-            const patientsRes = await axios.get('http://localhost:5002/provider/patients', config);
+            const patientsRes = await axios.get(`${import.meta.env.VITE_API_URL}/provider/patients`, config);
             const foundPatient = patientsRes.data.find(p => p._id === id);
             setPatient(foundPatient);
 
             // Fetch Vitals
             const vitalsRes = await axios.get(
-                `http://localhost:5002/provider/patients/${id}/vitals`,
+                `${import.meta.env.VITE_API_URL}/provider/patients/${id}/vitals`,
                 config
             );
             setVitals(vitalsRes.data);
 
             // Fetch Notes
             const notesRes = await axios.get(
-                `http://localhost:5002/provider/patients/${id}/notes`,
+                `${import.meta.env.VITE_API_URL}/provider/patients/${id}/notes`,
                 config
             );
             setNotes(notesRes.data);
@@ -63,7 +63,7 @@ const PatientDetailsPage = () => {
             };
 
             await axios.post(
-                `http://localhost:5002/provider/patients/${id}/notes`,
+                `${import.meta.env.VITE_API_URL}/provider/patients/${id}/notes`,
                 { note: newNote },
                 config
             );
@@ -72,7 +72,7 @@ const PatientDetailsPage = () => {
             setNewNote('');
             // Refresh notes
             const notesRes = await axios.get(
-                `http://localhost:5002/provider/patients/${id}/notes`,
+                `${import.meta.env.VITE_API_URL}/provider/patients/${id}/notes`,
                 config
             );
             setNotes(notesRes.data);

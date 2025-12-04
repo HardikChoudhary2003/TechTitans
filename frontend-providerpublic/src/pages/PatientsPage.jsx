@@ -26,7 +26,7 @@ const PatientsPage = () => {
                 },
             };
             const response = await axios.get(
-                'http://localhost:5002/provider/patients',
+                `${import.meta.env.VITE_API_URL}/provider/patients`,
                 config
             );
 

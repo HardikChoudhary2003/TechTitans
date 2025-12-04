@@ -20,7 +20,7 @@ const GoalsPage = () => {
                 },
             };
             const response = await axios.get(
-                'http://localhost:5000/patient/goals',
+                `${import.meta.env.VITE_API_URL}/patient/goals`,
                 config
             );
             setGoals(response.data);
@@ -46,7 +46,7 @@ const GoalsPage = () => {
             };
 
             await axios.post(
-                'http://localhost:5000/patient/goals',
+                `${import.meta.env.VITE_API_URL}/patient/goals`,
                 { description, targetDate },
                 config
             );

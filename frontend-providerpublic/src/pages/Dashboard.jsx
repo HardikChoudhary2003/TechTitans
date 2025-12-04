@@ -47,7 +47,7 @@ const Dashboard = () => {
                 },
             };
             // In a real app, these would be separate API calls or a single stats endpoint
-            const patientsRes = await axios.get('http://localhost:5002/provider/patients', config);
+            const patientsRes = await axios.get(`${import.meta.env.VITE_API_URL}/provider/patients`, config);
 
             setStats({
                 totalPatients: patientsRes.data.length,
