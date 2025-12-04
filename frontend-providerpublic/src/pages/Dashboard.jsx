@@ -2,6 +2,16 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts';
 import ProviderSidebar from '../components/ProviderSidebar';
 
 const Dashboard = () => {
@@ -80,8 +90,33 @@ const Dashboard = () => {
 
                     <div className="chart-container">
                         <h2>Patient Analytics</h2>
-                        <div className="chart-placeholder">
-                            <p>Patient Growth Graph Placeholder</p>
+                        <div style={{ height: '300px', width: '100%' }}>
+                            <ResponsiveContainer>
+                                <BarChart
+                                    data={[
+                                        { name: 'Jan', patients: 65 },
+                                        { name: 'Feb', patients: 59 },
+                                        { name: 'Mar', patients: 80 },
+                                        { name: 'Apr', patients: 81 },
+                                        { name: 'May', patients: 56 },
+                                        { name: 'Jun', patients: 55 },
+                                        { name: 'Jul', patients: 40 },
+                                    ]}
+                                    margin={{
+                                        top: 5,
+                                        right: 30,
+                                        left: 20,
+                                        bottom: 5,
+                                    }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="patients" fill="#007bff" />
+                                </BarChart>
+                            </ResponsiveContainer>
                         </div>
                     </div>
                 </div>
