@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -91,6 +91,9 @@ const LoginPage = () => {
                         </button>
                     </div>
                 </form>
+                <p style={{ textAlign: 'center', marginTop: '10px' }}>
+                    Don't have an account? <Link to="/patient/register">Register</Link>
+                </p>
             </section>
         </div>
     );
