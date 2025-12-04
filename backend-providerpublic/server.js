@@ -25,6 +25,7 @@ const connectDB = async () => {
 connectDB();
 
 app.use('/provider', require('./routes/providerRoutes'));
+app.use('/public', require('./routes/publicRoutes'));
 
 app.get('/', (req, res) => {
     res.send('Provider Public Backend is running');
