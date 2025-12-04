@@ -3,6 +3,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoginPage from './pages/LoginPage';
 
+import Dashboard from './pages/Dashboard';
+
 function App() {
   return (
     <>
@@ -10,7 +12,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/patient/login" element={<LoginPage />} />
-            <Route path="/patient/dashboard" element={<h1>Dashboard Placeholder</h1>} />
+            <Route path="/patient/dashboard" element={<Dashboard />} />
             <Route path="*" element={<Navigate to="/patient/login" replace />} />
           </Routes>
         </div>
