@@ -25,6 +25,7 @@ const connectDB = async () => {
 connectDB();
 
 app.use('/auth', require('./routes/authRoutes'));
+app.use('/patient', require('./routes/patientRoutes'));
 
 app.get('/', (req, res) => {
     res.send('Patient Auth Backend is running');
