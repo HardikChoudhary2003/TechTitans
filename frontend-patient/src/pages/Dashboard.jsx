@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -40,41 +41,100 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="dashboard-container">
-            <header className="dashboard-header">
-                <h1>Welcome, {user.name}</h1>
-                <button className="btn btn-logout" onClick={onLogout}>
-                    Logout
-                </button>
-            </header>
+        <div className="app-container">
+            <Sidebar onLogout={onLogout} />
+            <div className="main-content">
+                <header className="dashboard-header">
+                    <h1>Welcome, {user.name}</h1>
+                    {/* Logout button moved to sidebar */}
+                </header>
 
-            <div className="kpi-grid">
-                <div className="kpi-card">
-                    <h3>Steps Today</h3>
-                    <p className="kpi-value">{healthData.steps}</p>
-                    <span className="kpi-unit">steps</span>
-                </div>
-                <div className="kpi-card">
-                    <h3>Sleep</h3>
-                    <p className="kpi-value">{healthData.sleep}</p>
-                    <span className="kpi-unit">hours</span>
-                </div>
-                <div className="kpi-card">
-                    <h3>Heart Rate</h3>
-                    <p className="kpi-value">{healthData.heartRate}</p>
-                    <span className="kpi-unit">bpm</span>
-                </div>
-                <div className="kpi-card">
-                    <h3>Water Intake</h3>
-                    <p className="kpi-value">{healthData.water}</p>
-                    <span className="kpi-unit">liters</span>
-                </div>
-            </div>
+                <div className="dashboard-content">
+                    <section className="wellness-goals">
+                        <h2 className="section-title">Wellness Goals</h2>
 
-            <div className="chart-container">
-                <h2>Progress Overview</h2>
-                <div className="chart-placeholder">
-                    <p>Graph Placeholder (e.g., Weekly Activity)</p>
+                        {/* Steps Goal */}
+                        <div className="goal-card-detailed">
+                            <div className="goal-header">
+                                <div className="goal-icon steps-icon">👣</div>
+                                <div className="goal-info">
+                                    <h3>Steps</h3>
+                                    <div className="goal-stats">
+                                        <span className="current">{healthData.steps}</span>
+                                        <span className="target">/ 10000 steps</span>
+                                    </div>
+                                </div>
+                                <div className="goal-meta">
+                                    <span>Now</span>
+                                </div>
+                            </div>
+                            <div className="progress-bar-container">
+                                <div
+                                    className="progress-bar-fill"
+                                    style={{ width: `${(healthData.steps / 10000) * 100}%` }}
+                                ></div>
+                                <span className="progress-text">{Math.round((healthData.steps / 10000) * 100)}%</span>
+                            </div>
+                        </div>
+
+                        {/* Active Time Goal */}
+                        <div className="goal-card-detailed">
+                            <div className="goal-header">
+                                <div className="goal-icon time-icon">🕒</div>
+                                <div className="goal-info">
+                                    <h3>Active Time</h3>
+                                    <div className="goal-stats">
+                                        <span className="current">56</span>
+                                        <span className="target">/ 60 mins</span>
+                                    </div>
+                                </div>
+                                <div className="goal-meta">
+                                    <span>1712 Kcal | 1.23km</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sleep Goal */}
+                        <div className="goal-card-detailed">
+                            <div className="goal-header">
+                                <div className="goal-icon sleep-icon">🌙</div>
+                                <div className="goal-info">
+                                    <h3>Sleep</h3>
+                                    <div className="goal-stats">
+                                        <span className="current">{healthData.sleep}</span>
+                                        <span className="target">hrs</span>
+                                    </div>
+                                </div>
+                                <div className="goal-meta">
+                                    <span>11:30 pm - 06:00 am</span>
+                                </div>
+                            </div>
+                            <div className="sleep-visual">
+                                {/* Placeholder for sleep visual if needed, or just text */}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="preventive-care">
+                        <h2 className="section-title">Preventive Care Reminders</h2>
+                        <div className="reminders-list-simple">
+                            <div className="reminder-item">
+                                <span className="reminder-bullet">•</span>
+                                <span className="reminder-text">Upcoming: Annual blood test on 23rd Jan 2025</span>
+                            </div>
+                            <div className="reminder-item">
+                                <span className="reminder-bullet">•</span>
+                                <span className="reminder-text">Flu Shot Vaccination due next month</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div className="health-tip-container" style={{ marginTop: '30px', background: '#e8f5e9', padding: '20px', borderRadius: '10px', borderLeft: '5px solid #28a745' }}>
+                        <h3 style={{ color: '#28a745', marginBottom: '10px' }}>Health Tip of the Day</h3>
+                        <p style={{ color: '#333', fontStyle: 'italic' }}>
+                            Stay hydrated! Aim to drink at least 8 glasses of water per day.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
