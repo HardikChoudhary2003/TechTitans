@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoginPage from './pages/LoginPage';
 
 import Dashboard from './pages/Dashboard';
+import VitalsPage from './pages/VitalsPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/patient/login" element={<LoginPage />} />
             <Route path="/patient/dashboard" element={<Dashboard />} />
+            <Route path="/patient/vitals" element={<VitalsPage />} />
             <Route path="*" element={<Navigate to="/patient/login" replace />} />
           </Routes>
         </div>
