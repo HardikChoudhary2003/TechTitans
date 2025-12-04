@@ -203,3 +203,78 @@ body {
   background-color: #f8f9fa;
   font-weight: 600;
 }
+
+/* Goals and Reminders Styles */
+.goals-container,
+.reminders-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.goals-header,
+.reminders-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.goals-content,
+.reminders-content {
+  display: grid;
+  gap: 30px;
+}
+
+.goals-form-section,
+.goals-list-section,
+.reminders-form-section,
+.reminders-list-section {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.goals-grid,
+.reminders-list {
+  display: grid;
+  gap: 15px;
+}
+
+.goal-card,
+.reminder-card {
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fdfdfd;
+}
+
+.goal-card h4,
+.reminder-card h4 {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.goal-card p,
+.reminder-card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-active {
+  background-color: #e6f7ff;
+  color: #007bff;
+}
+
+.status-completed {
+  background-color: #d4edda;
+  color: #28a745;
+}

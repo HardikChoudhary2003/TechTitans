@@ -5,6 +5,8 @@ import LoginPage from './pages/LoginPage';
 
 import Dashboard from './pages/Dashboard';
 import VitalsPage from './pages/VitalsPage';
+import GoalsPage from './pages/GoalsPage';
+import RemindersPage from './pages/RemindersPage';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             <Route path="/patient/login" element={<LoginPage />} />
             <Route path="/patient/dashboard" element={<Dashboard />} />
             <Route path="/patient/vitals" element={<VitalsPage />} />
+            <Route path="/patient/goals" element={<GoalsPage />} />
+            <Route path="/patient/reminders" element={<RemindersPage />} />
             <Route path="*" element={<Navigate to="/patient/login" replace />} />
           </Routes>
         </div>
